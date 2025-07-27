@@ -10,6 +10,7 @@ import os
 def main():
     root = input("Enter Root directory: ")
     root_path = get_dir(root)
+    print(find_all_paths(root_path))
 
 def get_dir(root):
     while True:
@@ -19,6 +20,19 @@ def get_dir(root):
         elif current_dir == '/':
             raise FileNotFoundError("Requested directory not found")
         os.chdir("..")
+
+def find_all_paths(root_path):
+    paths = []
+
+    current_dir = root_path
+    current_dir_contents = os.listdir(current_dir)
+    for path in current_dir_contents:
+        if not os.path.isdir(path):
+            paths.append(os.path.join(current_dir, path))
+        else:
+            paths.extend(find_all_paths(path))
+
+    return paths
 
 if __name__ == "__main__":
     main()
