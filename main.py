@@ -8,6 +8,8 @@ def main():
     print(f"Found! File: {find_path(desired_file, all_paths)}")
 
 def get_dir(root):
+    if root == '/':
+        return root
     while True:
         current_dir = os.getcwd()
         if os.path.basename(current_dir) == root:
@@ -22,10 +24,10 @@ def find_all_paths(root_path):
     current_dir = root_path
     current_dir_contents = os.listdir(current_dir)
     for path in current_dir_contents:
-        if not os.path.isdir(path):
-            paths.append(os.path.join(current_dir, path))
+        if not os.path.isdir(os.path.join(current_dir, path)):
+            paths.append(path)
         else:
-            paths.extend(find_all_paths(path))
+            paths.extend(find_all_paths(os.path.join(current_dir, path)))
 
     return paths
 
