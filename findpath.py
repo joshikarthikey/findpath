@@ -1,7 +1,7 @@
 import os
 
 
-class GetPath:
+class FindPath:
     def __init__(self):
         self.root = None
         self.root_path = None
@@ -22,7 +22,7 @@ class GetPath:
                 raise FileNotFoundError("Requested directory not found")
             os.chdir("..")
 
-        GetPath.find_all_paths(self, self.root_path)
+        FindPath.find_all_paths(self, self.root_path)
         desired_path = ""
         occurrences = 0
         for path in self.all_paths:
@@ -47,7 +47,7 @@ class GetPath:
                 paths.append(os.path.join(current_dir, path))
             else:
                 paths.extend(
-                    GetPath.find_all_paths(self, os.path.join(current_dir, path))
+                    FindPath.find_all_paths(self, os.path.join(current_dir, path))
                 )
 
         self.all_paths = paths
