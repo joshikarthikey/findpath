@@ -1,16 +1,11 @@
-#Get root dir name
-#Go to root dir name
-    #Throw error if root dir name not found
-#Find all possible paths
-    #If two files with same name found, throw Error
-    #If no matching file found, throw Error
-#Return file path as str
 import os
 
 def main():
     root = input("Enter Root directory: ")
     root_path = get_dir(root)
-    print(find_all_paths(root_path))
+    all_paths = find_all_paths(root_path)
+    desired_file = input("Enter desired file: ")
+    print(f"Found! File: {find_path(desired_file, all_paths)}")
 
 def get_dir(root):
     while True:
@@ -33,6 +28,20 @@ def find_all_paths(root_path):
             paths.extend(find_all_paths(path))
 
     return paths
+
+def find_path(desired_file, all_paths):
+    requested_path = ""
+    occurrences = 0
+    for path in all_paths:
+        if desired_file == os.path.basename(path):
+            requested_path = path
+            occurrences += 1
+    if not requested_path:
+        raise FileNotFoundError("Requested file not found")
+    elif occurrences > 1:
+        raise ValueError("More than one file found")
+
+    return requested_path
 
 if __name__ == "__main__":
     main()
