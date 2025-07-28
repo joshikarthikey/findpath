@@ -10,7 +10,7 @@ class FindPath:
         self.your_path = None
         self.current_dir = os.getcwd()
 
-    def find(self, desired_file):
+    def find(self, desired_file: str) -> str:
         self.file = desired_file
         if self.root == "/":
             self.root_path = self.root
@@ -37,7 +37,7 @@ class FindPath:
         self.your_path = desired_path
         return self.your_path
 
-    def find_all_paths(self, root_path):
+    def find_all_paths(self, root_path: str) -> list:
         paths = []
 
         current_dir = root_path
