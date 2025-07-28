@@ -2,8 +2,8 @@ import os
 
 
 class FindPath:
-    def __init__(self):
-        self.root = None
+    def __init__(self, root=None):
+        self.root = root
         self.root_path = None
         self.all_paths = None
         self.file = None
